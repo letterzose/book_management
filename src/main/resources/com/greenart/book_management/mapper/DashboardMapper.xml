@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.greenart.book_management.mapper.DashboardMapper">
+    <select id="getTotalBookCnt" resultType="java.lang.Integer">
+        select count(*) from book_info
+    </select>
+    <select id="getPossibleBookCnt" resultType="java.lang.Integer">
+        select count(*) from book_info where bi_status=1
+    </select>
+    <select id="getImpossibleBookCnt" resultType="java.lang.Integer">
+        select count(*) from book_info where bi_status=2
+    </select>
+
+    <select id="getTotalMemberCnt" resultType="java.lang.Integer">
+        select count(*) from member_info
+    </select>
+    <select id="getNewMemberCnt" resultType="java.lang.Integer">
+        select count(*) from member_info where mi_status=1
+    </select>
+    <select id="getStopMemberCnt" resultType="java.lang.Integer">
+        select count(*) from member_info where mi_status=2
+    </select>
+    <select id="getLeaveMemberCnt" resultType="java.lang.Integer">
+        select count(*) from member_info where mi_status=3
+    </select>
+        <select id="getRentalBookCnt" resultType="java.lang.Integer">
+        select count(*) from book_rental_info where bri_status=0
+    </select>
+        <select id="getReturnBookCnt" resultType="java.lang.Integer">
+        select count(*) from book_rental_info where bri_status=1
+    </select>
+</mapper>
