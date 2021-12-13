@@ -26,7 +26,8 @@
                 <a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> 로그아웃</a>
             </div>
             <div class="main_menu">
-                <a href="#"><i class="fas fa-book"></i> 도서 관리</a>
+                <a href="/"><i class="fas fa-columns"></i> 대시보드</a>
+                <a href="book"><i class="fas fa-book"></i> 도서 관리</a>
                 <a href="#"><i class="fas fa-address-book"></i> 회원 관리</a>
                 <a href="#"><i class="fas fa-book-reader"></i> 대출/반납 관리</a>
             </div>
