@@ -56,7 +56,7 @@
                                 <td>${b.bi_stock}권</td>
                                 <td>${b.bi_category}</td>
                                 <td>${b.bi_reg_dt}</td>
-                                <td>${b.bi_mod_td}</td>
+                                <td>${b.bi_mod_dt}</td>
                                 <td>
                                     <button class="modify_btn" data-seq="${b.bi_seq}"><i class="fas fa-pencil-alt"></i></button>
                                     <button class="delete_btn" data-seq="${b.bi_seq}"><i class="fas fa-minus-circle"></i></button>
@@ -120,6 +120,7 @@
             </div>
             <div class="btn_area">
                 <button id="add_dep">등록하기</button>
+                <button id="modify_dep">수정하기</button>
                 <button id="cancel_dep">취소하기</button>
             </div>
         </div>
