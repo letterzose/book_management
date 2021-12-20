@@ -127,4 +127,17 @@ public class BookService {
 
         return resultMap;
     }
+
+    public Map<String, Object> getBookByKeyword(String keyword) {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+
+        if(keyword == null) keyword= "%%";
+        keyword = "%"+keyword+"%";
+
+        List<BookVO> list = mapper.getBookByKeyword(keyword);
+
+        resultMap.put("status", true);
+        resultMap.put("list", list);
+        return resultMap;
+    }
 }

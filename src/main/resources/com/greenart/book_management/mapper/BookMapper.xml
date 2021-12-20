@@ -32,4 +32,7 @@
         INSERT INTO book_db.book_history(bookh_type, bookh_content, bookh_bi_seq)
         VALUES(#{bookh_type}, #{bookh_content}, #{bookh_bi_seq})
     </insert>
+    <select id="getBookByKeyword" resultType="com.greenart.book_management.data.BookVO">
+        select bi_seq, bi_title, bi_author, bi_category, bi_status from book_info where bi_title like #{keyword}
+    </select>
 </mapper>
