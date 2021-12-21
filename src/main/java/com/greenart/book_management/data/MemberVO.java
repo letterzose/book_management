@@ -17,4 +17,8 @@ public class MemberVO {
     private Date mi_mod_dt;	
     private Integer mi_status;
     private String book_title;
+    
+    public String makeHistoryStr() {
+        return mi_bi_seq+"|"+mi_name+"|"+mi_birth+"|"+mi_phone_num+"|"+mi_email+"|"+mi_status;
+    }
 }

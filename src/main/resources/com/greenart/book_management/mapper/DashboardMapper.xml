@@ -30,4 +30,10 @@
         <select id="getReturnBookCnt" resultType="java.lang.Integer">
         select count(*) from book_rental_info where bri_status=1
     </select>
+    <select id="getBookUpdateDate" resultType="java.util.Date">
+        select bookh_reg_dt from book_history order by bookh_reg_dt desc limit 1
+    </select>
+    <select id="getMemberUpdateDate" resultType="java.util.Date">
+        select mih_reg_dt from member_info_history order by mih_reg_dt desc limit 1
+    </select>
 </mapper>

@@ -36,4 +36,35 @@
             where mi_name like #{keyword}
         </if>
     </select>
+    <delete id="deleteMemberInfo">
+        delete from member_info where mi_seq = #{seq}
+    </delete>
+    <select id="isExistMember" resultType="java.lang.Integer">
+        select count(*) from member_info where mi_seq = #{seq}
+    </select>
+    <select id="getMemberInfoBySeq" resultType="com.greenart.book_management.data.MemberVO">
+        select 
+            mi_seq, mi_bi_seq, mi_name, mi_birth, 
+            mi_phone_num, mi_email, mi_status, bi_title as book_title
+        from 
+            member_info a left outer join book_info b 
+        on
+            a.mi_bi_seq = b.bi_seq
+        where mi_seq = #{seq}
+    </select>
+    <update id="updateMemberInfo">
+        update member_info set
+            mi_bi_seq = #{mi_bi_seq}, mi_name = #{mi_name}, mi_birth = #{mi_birth},
+            mi_phone_num = #{mi_phone_num}, mi_email = #{mi_email}, mi_status = #{mi_status}, mi_mod_dt = NOW()
+        where mi_seq = #{mi_seq}
+    </update>
+    <insert id="insertMemberHistory">
+        INSERT INTO member_info_history
+        (mih_bi_seq, mih_type, mih_content)
+        VALUES
+        (#{mih_bi_seq}, #{mih_type}, #{mih_content})
+    </insert>
+    <select id="getRecentAddedMemberSeq" resultType="java.lang.Integer">
+        select mi_seq from member_info order by mi_seq desc limit 1
+    </select>
 </mapper>

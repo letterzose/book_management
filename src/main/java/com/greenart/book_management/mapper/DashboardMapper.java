@@ -1,4 +1,6 @@
 package com.greenart.book_management.mapper;
+import java.util.Date;
+
 //com/greenart/book_management/mapper
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,4 +17,7 @@ public interface DashboardMapper {
 
     public Integer getRentalBookCnt();
     public Integer getReturnBookCnt();
+
+    public Date getBookUpdateDate();
+    public Date getMemberUpdateDate();
 }

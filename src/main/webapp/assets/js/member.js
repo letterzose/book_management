@@ -92,8 +92,8 @@ $(function(){
         })
     })
     $("#add_book").click(function(){
-        alert
         $(".popup_wrap").css("display", "block");
+        $("#add_dep").css("display", "inline-block");
         $("#modify_dep").css("display", "none");
         $("#cancel_dep").css("display", "inline-block");
         $(".popup .top_area h2").html("회원 추가");
@@ -119,6 +119,75 @@ $(function(){
         let keyword = $("#keyword").val();
 
         location.href = "/member?type="+type+"&keyword="+keyword;
+    })
+
+    $(".delete_btn").click(function(){
+        if(!confirm("삭제하시겠습니까?")) return;
+        let seq = $(this).attr("data-seq");
+        $.ajax({
+            url:"/member/delete?seq="+seq,
+            type:"delete",
+            success:function(r) {
+                alert(r.message);
+                if(r.status)
+                    location.reload();
+            },
+            error:function(r) {
+                console.log(r)
+                alert(r.responseJSON.message);
+            }
+        })
+    })
+
+    let modify_seq = 0;
+    $(".modify_btn").click(function(){
+        let seq = $(this).attr("data-seq");
+        modify_seq = seq;
+        $.ajax({
+            url:"/member/get?seq="+seq,
+            type:"get",
+            success:function(r) {
+                $(".popup_wrap").css("display", "block");
+                $("#add_dep").css("display", "none");
+                $("#modify_dep").css("display", "inline-block");
+                $("#cancel_dep").css("display", "inline-block");
+                $(".popup .top_area h2").html("회원 수정");
+                $(".popup .top_area p").html("회원 정보를 수정해주세요");
+
+                $("#book_title_info").attr("data-book-seq", r.mi_bi_seq);
+                $("#book_title_info").val(r.book_title);
+                $("#member_name").val(r.mi_name);
+                $("#member_pwd").val("**********");
+                $("#member_pwd_confirm").val("**********");
+                $("#member_birth").val(r.mi_birth);
+                $("#member_phone").val(r.mi_phone_num);
+                $("#member_email").val(r.mi_email);
+                $("#member_status").val(r.mi_status).prop("selected", true);
+            }
+        })
+    })
+
+    $("#modify_dep").click(function(){
+        if(confirm("수정하시겠습니까?") == false) return;
+        let data = {
+            mi_seq:modify_seq,
+            mi_bi_seq:$("#book_title_info").attr("data-book-seq"),
+            mi_name:$("#member_name").val(),
+            mi_birth:$("#member_birth").val(),
+            mi_phone_num:$("#member_phone").val(),
+            mi_email:$("#member_email").val(),
+            mi_status:$("#member_status option:selected").val()        
+        }
+        $.ajax({
+            url:"/member/modify",
+            type:"patch",
+            data:JSON.stringify(data),
+            contentType:"application/json",
+            success:function(r) {
+                if(r.status)
+                    location.reload();
+            }
+        })
     })
 })
 
